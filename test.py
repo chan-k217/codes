@@ -40,9 +40,9 @@ sanitized_users = get_dataset('2WqVuoVMjK014lMUTWOpinoNqut') # input the dataset
 # In[6]:
 
 
-sanitized_users.head(2)
+#print(sanitized_users.head(2))
 
-
+sanitized_users.to_csv('sanitized_users_data.csv', index=False)
 # In[ ]:
 
 
