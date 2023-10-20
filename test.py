@@ -13,9 +13,14 @@ def get_dataset(dataset_id):
     import requests
     import pandas as pd
     url = "https://second-api.ikigailabs.io/pypr/get-dataset-download-url?dataset_id=" + dataset_id
+    # headers = {
+    #         'User': 'aisuccess@ikigailabs.io',
+    #         'api-key': '2WqTom16Vir5MTPaM3C412H0Gcy'
+    #         }
+     #define headers
     headers = {
-            'User': 'aisuccess@ikigailabs.io',
-            'api-key': '2WqTom16Vir5MTPaM3C412H0Gcy'
+              'User': 'chanikya@ikigailabs.io',
+              'Api-key': '2Fiwtvwiyu3t60zcZfi9wiWySFj'
             }
 
     response = requests.request("GET", url, headers=headers)
