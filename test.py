@@ -73,8 +73,8 @@ def upload_to_ikigai(dataset_id, df):
 
 
 #df1 = get_dataset(dataset_id as string)
-sanitized_users = get_dataset('2WzMbPsFHXjCmZCc1aeHEXEQaVP') # input the dataset_id as string from the url for ex: https://app.ikigailabs.io/dataset/2WqVuoVMjK014lMUTWOpinoNqut
-
+# input the dataset_id as string from the url for ex: https://app.ikigailabs.io/dataset/2WqVuoVMjK014lMUTWOpinoNqut
+sanitized_users = get_dataset('2WzMbPsFHXjCmZCc1aeHEXEQaVP') 
 
 size, types = upload_to_ikigai('2WsNviYTVu3PxRNTlgPKbrEP43g', sanitized_users)
 size
