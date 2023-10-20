@@ -68,10 +68,6 @@ def upload_to_ikigai(dataset_id, df):
     return size, column_data_types 
     
 
-
-# In[4]:
-
-
 #df1 = get_dataset(dataset_id as string)
 # input the dataset_id as string from the url for ex: https://app.ikigailabs.io/dataset/2WqVuoVMjK014lMUTWOpinoNqut
 sanitized_users = get_dataset('2WzMbPsFHXjCmZCc1aeHEXEQaVP')
