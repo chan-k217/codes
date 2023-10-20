@@ -22,12 +22,51 @@ def get_dataset(dataset_id):
     #print(response)
     data = pd.read_csv(response.json()['url'], low_memory = False)
     return data
+def upload_to_ikigai(dataset_id, df):
+    import requests
+    import pandas as pd
+    
+    #define headers
+    headers = {
+              'User': 'chanikya@ikigailabs.io',
+              'Api-key': '2Fiwtvwiyu3t60zcZfi9wiWySFj'
+            }
+    # get aws upload url
+    get_upload_api = f"https://second-api.ikigailabs.io/pypr/get-dataset-upload-url?dataset_id={dataset_id}&filename=file.csv"
 
+    aws_url_response = requests.request("GET", get_upload_api, headers=headers)
 
-# In[2]:
+    aws_url = aws_url_response.json()['url']
+    aws_url
+    
+    file_path = './Ikigai_upload_file.csv'
+    # upload the file content to aws url
+    df.to_csv(file_path, index = False)
 
+    with open(file_path, 'rb') as f:
+        file_data = f.read()
 
-help(get_dataset)
+    upload_response = requests.request("PUT", 
+                                aws_url, 
+                                data=file_data,
+                                headers={"Content-Type": "text/csv", "Cache-Control": "no-cache"},)
+    
+    
+    # verify upload
+    
+    verify_upload_api = f"https://second-api.ikigailabs.io/pypr/verify-dataset-upload?dataset_id={dataset_id}&filename=file.csv"
+    verify_response = requests.request("GET", verify_upload_api, headers=headers)
+    
+    # uploaded dataset details
+    
+    get_dataset_api = f"https://second-api.ikigailabs.io/pypr/get-dataset?dataset_id={dataset_id}"
+    get_dataset_response = requests.request("GET", get_dataset_api, headers=headers)
+
+    # return output
+    size = get_dataset_response.json()['dataset']['size']
+    column_data_types = get_dataset_response.json()['dataset']['data_types']    
+    return size, column_data_types 
+    
 
 
 # In[4]:
@@ -37,13 +76,9 @@ help(get_dataset)
 sanitized_users = get_dataset('2WqVuoVMjK014lMUTWOpinoNqut') # input the dataset_id as string from the url for ex: https://app.ikigailabs.io/dataset/2WqVuoVMjK014lMUTWOpinoNqut
 
 
-# In[6]:
+size, types = upload_to_ikigai('2WsNviYTVu3PxRNTlgPKbrEP43g', sanitized_users)
+size
 
-
-#print(sanitized_users.head(2))
-
-sanitized_users.to_csv('sanitized_users_data.csv', index=False)
-# In[ ]:
 
 
 
