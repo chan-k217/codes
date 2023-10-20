@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 def get_dataset(dataset_id):
     '''
     Read data from Ikigai datasets
